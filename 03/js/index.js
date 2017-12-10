@@ -27,6 +27,13 @@ let mapLayer = {
   "MIERUNE": mierune
 };
 
+// レイヤーコントローラーの表示
 L.control.layers(
-    mapLayer,
+    mapLayer
 ).addTo(map);
+
+// スケールの表示
+L.control.scale({
+  imperial: false,
+  maxWidth: 500
+}).addTo(map);
