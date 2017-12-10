@@ -74,7 +74,6 @@ let marker = L.marker([43.4047068, 142.4223918]).addTo(map);
 //     }
 // ).addTo(map);
 
-
 //背景レイヤ
 let mapLayer = {
   "Open Street Map": osm,
@@ -82,6 +81,13 @@ let mapLayer = {
   "MIERUNE": mierune
 };
 
+// レイヤーコントローラーの表示
 L.control.layers(
-    mapLayer,
+    mapLayer
 ).addTo(map);
+
+// スケールの表示
+L.control.scale({
+  imperial: false,
+  maxWidth: 500
+}).addTo(map);
