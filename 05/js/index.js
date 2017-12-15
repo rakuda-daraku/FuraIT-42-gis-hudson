@@ -53,7 +53,6 @@ L.control.scale({
 }).addTo(map);
 
 function myStyle(feature) {
-  console.log(feature.properties.N03_002);
   const colors = {
     "石狩振興局": '#4169e1',
     "渡島総合振興局": "#778899",
