@@ -15,66 +15,26 @@ const mierune = new L.tileLayer('https://tile.mierune.co.jp/mierune_mono/{z}/{x}
 
 let map = L.map('map', {
   center: [43.4047068, 142.4223918],
-  zoom: 18,
+  zoom: 7,
   zoomControl: true,
   layers: [osm]
 });
 
-// アイコンマーカー（デフォルト）
-let marker = L.marker([43.4047068, 142.4223918]).addTo(map);
-// marker.bindPopup('<b>ふれあいセンターなかまーる</b><br>北海道空知郡中富良野町南町10−10').openPopup();
+// 松屋レイヤー
+// L.geoJson(matuya).addTo(map);
 
-// アイコンマーカー（アイコン画像を変更）
-// let icon = new L.Icon({
-//   iconUrl: 'img/building_kouminkan.png',
-//   iconRetinaUrl: 'img/building_kouminkan.png',
-//   iconSize:     [38, 95],
-//   shadowSize:   [50, 64],
-//   iconAnchor:   [22, 94],
-//   shadowAnchor: [4, 62],
-//   popupAnchor:  [-3, -76]
-// });
-//
-// let customMarker = L.marker([43.4047068, 142.4223918], {icon: icon}).addTo(map);
+// 北海道レイヤー
+// L.geoJson(hokkaido,  {
+  // onEachFeature: function (feature, layer) {
+  //   layer.bindPopup(feature.properties.N03_004);
+  // },
+  // style: function(feature) {
+  //   return myStyle(feature);
+  // }
+// }).addTo(map);
 
-// サークル
-// let circle = L.circle([43.4047068, 142.4223918], 100, {
-//     color: 'red',
-//     fillColor: '#0402ff',
-//     fillOpacity: 0.5
-//   }).addTo(map);
 
-// ライン
-// let marker = L.marker([43.4047068, 142.4223918]).addTo(map);
-// let line = L.polyline([
-//       [ 43.405051385195776, 142.42116808891294],
-//       [ 43.40557752182578, 142.42162942886353],
-//       [ 43.40523066189408, 142.42238581180573],
-//       [ 43.404860415955284, 142.42207467556],
-//       [ 43.4047068, 142.4223918]
-//     ],
-//     {
-//       "color": "#0402ff",
-//       "weight": 5,
-//       "opacity": 0.6
-//     }
-// ).addTo(map);
-
-// ポリゴン
-// let polygon = L.polygon([
-//       [ 43.40498902795896, 142.42235898971558],
-//       [ 43.40486821062996, 142.42225170135498],
-//       [ 43.40476687978113, 142.42248237133026],
-//       [ 43.40487600530363, 142.42258429527283]
-//     ],
-//     {
-//       "color": "#0402ff",
-//       "weight": 5,
-//       "opacity": 0.6
-//     }
-// ).addTo(map);
-
-//背景レイヤ
+// 背景レイヤ
 let mapLayer = {
   "Open Street Map": osm,
   "国土地理院": chiriin,
@@ -91,3 +51,30 @@ L.control.scale({
   imperial: false,
   maxWidth: 500
 }).addTo(map);
+
+function myStyle(feature) {
+  console.log(feature.properties.N03_002);
+  const colors = {
+    "石狩振興局": '#4169e1',
+    "渡島総合振興局": "#778899",
+    "後志総合振興局": "#e5a323",
+    "上川総合振興局": "#b22222",
+    "胆振総合振興局": "#006400",
+    "釧路総合振興局": "#bc611e",
+    "十勝総合振興局": "#8b4513",
+    "オホーツク総合振興局": "#5a4498",
+    "空知総合振興局": "#000080",
+    "留萌振興局": "#409ecc",
+    "宗谷総合振興局": "#ff6347",
+    "根室振興局": "#696969",
+    "檜山振興局": "#ffd700",
+    "日高振興局": "#434da2"
+  };
+
+  style = {
+    "color": colors[feature.properties.N03_002],
+    "weight": 2,
+    "opacity": 1
+  };
+  return style;
+}
